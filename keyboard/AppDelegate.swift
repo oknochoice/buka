@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyBeaver
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let log = SwiftyBeaver.self
+        let console = ConsoleDestination()
+        console.format = "$DHH:mm:ss$d $L $M"
+        log.addDestination(console)
+        log.info("a message")
         return true
     }
 

@@ -20,6 +20,11 @@ class KeyModel: NSObject {
 }
 
 class Key: NSObject {
+    static let leftPadding: CGFloat = 3.0
+    static let topPadding: CGFloat = 5.0
+    static let radius: CGFloat = 4.0
+    static let backgroundColorOther = #colorLiteral(red: 0.6351010799, green: 0.6533172727, blue: 0.6979339123, alpha: 1)
+    static let backgroundColorNormal = #colorLiteral(red: 0.9755813479, green: 0.7846637368, blue: 0.1785585284, alpha: 1)
         /*
         self.backgroundColor = UIColor.yellow
         self.autoresizesSubviews = false
@@ -33,9 +38,6 @@ class Key: NSObject {
     
     static func drawARect(context:CGContext?, rect: CGRect) {
         // 绘制矩形框
-        let leftPadding: CGFloat = 3.0
-        let topPadding: CGFloat = 5.0
-        let radius: CGFloat = 4.0
         let width = rect.size.width
         let height = rect.size.height
         let width_l = width - (leftPadding + radius) * 2
@@ -61,20 +63,11 @@ class Key: NSObject {
 }
 
 
-class EarthKey:UIView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = #colorLiteral(red: 0.666482389, green: 0.6846889853, blue: 0.7293098569, alpha: 1)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+class EarthKey:UIButton {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         let context = UIGraphicsGetCurrentContext();
-
+        // 画球
         let size:CGSize = rect.size;
         let r:CGFloat =  CGFloat(12); //(size.height - 12) / 2
         let p1:CGPoint = CGPoint(x: rect.origin.x + size.width / 2, y: rect.origin.y + size.height / 2 );//圆心
@@ -82,15 +75,11 @@ class EarthKey:UIView {
         let p3:CGPoint = CGPoint(x: p1.x, y: p1.y + r * sqrt(2));
         let p4:CGPoint = CGPoint(x: p1.x - r*3/4, y: p1.y);
         let p5:CGPoint = CGPoint(x: p1.x + r*3/4, y: p1.y);
-        
         context?.setStrokeColor(UIColor.white.cgColor);//设置画笔颜色
         context?.setLineWidth(1.0);//设置线条粗细
-        
         //顺时针画圆
         context?.addArc(center: p1, radius: r, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: false)
-        
         context?.strokePath();
-        
         //画上方的弧线
         context?.addArc(center: p2, radius: r, startAngle: CGFloat.pi / 4, endAngle: CGFloat.pi * 3/4, clockwise: false)
         

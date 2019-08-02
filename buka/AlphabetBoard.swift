@@ -11,31 +11,47 @@ import UIKit
 
 class AlphabetBoard: UIView {
     let lineNo = 4
+    var width: CGFloat = 0.0
+    var heiht: CGFloat = 0.0
+    var earth: EarthKey!
     override init(frame: CGRect) {
-        // 1th
         super.init(frame: frame)
-        self.backgroundColor = UIColor.green
-        /*
-        let width = frame.size.width / CGFloat(firstLine().count)
-        let heiht = frame.size.height / CGFloat(lineNo)
-        self.backgroundColor = #colorLiteral(red: 0.8177122474, green: 0.8286176324, blue: 0.8487907648, alpha: 1)
-        for index in 0..<firstLine().count {
-            let key = Key(frame: CGRect(x: CGFloat(index) * width, y: 0, width: width, height: heiht))
-            self.addSubview(key)
-        }
-        let secondPadding = (frame.size.width - CGFloat(secondLine().count) * width) / 2
-        for index in 0..<secondLine().count {
-            let key = Key(frame: CGRect(x: secondPadding + CGFloat(index) * width, y: heiht, width: width, height: heiht))
-            self.addSubview(key)
-        }
-        let thirdPadding = (frame.size.width - CGFloat(thirdLine().count) * width) / 2
-        for index in 0..<thirdLine().count {
-            let key = Key(frame: CGRect(x: thirdPadding + CGFloat(index) * width, y: heiht * 2, width: width, height: heiht))
-            self.addSubview(key)
-        }
-        let earth = EarthKey(frame: CGRect(x: 0, y: heiht * 2, width: thirdPadding, height: heiht))
+        width = frame.size.width / CGFloat(firstLine().count)
+        heiht = frame.size.height / CGFloat(lineNo)
+        self.backgroundColor = UIColor.white
+        
+        let height4 = heiht - 2 * Key.topPadding
+        let y4 = Key.topPadding + 3 * heiht
+        // 123
+        let b123 = UIButton(frame: CGRect(x: Key.leftPadding, y: y4, width: height4, height:height4 ))
+        b123.backgroundColor = Key.backgroundColorOther
+        b123.setTitle("123", for: .normal)
+        b123.layer.cornerRadius = Key.radius
+        b123.clipsToBounds = true
+        self.addSubview(b123)
+        // 地球
+        earth = EarthKey(frame: CGRect(x: b123.frame.maxX + 2 * Key.leftPadding,y: y4 , width: height4, height: height4))
+        earth.backgroundColor = Key.backgroundColorOther
+        earth.layer.cornerRadius = Key.radius
+        earth.clipsToBounds = true
         self.addSubview(earth)
- */
+        // 空格
+        let bSpaceX = earth.frame.maxX + 2 * Key.leftPadding
+        let bRetrunWidth = height4 * 2
+        let bSpace = UIButton(frame: CGRect(x: bSpaceX, y: y4, width: frame.size.width - bSpaceX - 3 * Key.leftPadding - bRetrunWidth, height: height4))
+        bSpace.setTitle("space", for: .normal)
+        bSpace.backgroundColor = Key.backgroundColorNormal
+        bSpace.layer.cornerRadius = Key.radius
+        bSpace.clipsToBounds = true
+        self.addSubview(bSpace)
+        // 换行
+        let bReturn = UIButton(frame: CGRect(x: bSpace.frame.maxX + 2 * Key.leftPadding, y: y4, width: bRetrunWidth, height: height4))
+        bReturn.setTitle("return", for: .normal)
+        bReturn.backgroundColor = Key.backgroundColorOther
+        bReturn.layer.cornerRadius = Key.radius
+        bReturn.clipsToBounds = true
+        self.addSubview(bReturn)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,8 +59,18 @@ class AlphabetBoard: UIView {
     }
     override func draw(_ rect: CGRect) {
         let ctx = UIGraphicsGetCurrentContext()
-        ctx?.setFillColor(UIColor.yellow.cgColor)
-        Key.drawARect(context: ctx, rect: rect)
+        ctx?.setFillColor(Key.backgroundColorNormal.cgColor)
+        for index in 0..<firstLine().count {
+            Key.drawARect(context: ctx, rect: CGRect(x: CGFloat(index) * width, y: 0, width: width, height: heiht))
+        }
+        let secondPadding = (frame.size.width - CGFloat(secondLine().count) * width) / 2
+        for index in 0..<secondLine().count {
+            Key.drawARect(context: ctx, rect: CGRect(x: secondPadding + CGFloat(index) * width, y: heiht, width: width, height: heiht))
+        }
+        let thirdPadding = (frame.size.width - CGFloat(thirdLine().count) * width) / 2
+        for index in 0..<thirdLine().count {
+            Key.drawARect(context: ctx, rect: CGRect(x: thirdPadding + CGFloat(index) * width, y: heiht * 2, width: width, height: heiht))
+        }
         ctx?.fillPath()
     }
     func firstLine() -> [KeyModel] {

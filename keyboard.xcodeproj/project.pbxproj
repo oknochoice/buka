@@ -21,6 +21,8 @@
 		2314478B22F3F5A70044F8EC /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2314478A22F3F5A70044F8EC /* SwiftyBeaver.framework */; };
 		2314478C22F3F5A70044F8EC /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2314478A22F3F5A70044F8EC /* SwiftyBeaver.framework */; };
 		2314478E22F3F7E90044F8EC /* SwiftyBeaver.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2314478A22F3F5A70044F8EC /* SwiftyBeaver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2314479022F4A5CD0044F8EC /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2314478F22F4A5CD0044F8EC /* ViewExtension.swift */; };
+		2314479122F4A5CD0044F8EC /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2314478F22F4A5CD0044F8EC /* ViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,7 @@
 		2314478022F3EBF50044F8EC /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		2314478122F3EBF50044F8EC /* AlphabetBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphabetBoard.swift; sourceTree = "<group>"; };
 		2314478A22F3F5A70044F8EC /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = SOURCE_ROOT; };
+		2314478F22F4A5CD0044F8EC /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +191,7 @@
 				2314478122F3EBF50044F8EC /* AlphabetBoard.swift */,
 				2314477D22F3EBCA0044F8EC /* Key.swift */,
 				2314477422F3EB790044F8EC /* Info.plist */,
+				2314478F22F4A5CD0044F8EC /* ViewExtension.swift */,
 			);
 			path = buka;
 			sourceTree = "<group>";
@@ -362,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2314479022F4A5CD0044F8EC /* ViewExtension.swift in Sources */,
 				2314474122F3EB630044F8EC /* ViewController.swift in Sources */,
 				2314473F22F3EB630044F8EC /* AppDelegate.swift in Sources */,
 			);
@@ -389,6 +394,7 @@
 			files = (
 				2314477F22F3EBCA0044F8EC /* Key.swift in Sources */,
 				2314478222F3EBF50044F8EC /* KeyboardViewController.swift in Sources */,
+				2314479122F4A5CD0044F8EC /* ViewExtension.swift in Sources */,
 				2314478322F3EBF50044F8EC /* AlphabetBoard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,7 +18,7 @@ class AlphabetBoard: UIView {
         super.init(frame: frame)
         width = frame.size.width / CGFloat(firstLine().count)
         heiht = frame.size.height / CGFloat(lineNo)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.green
         
         let height4 = heiht - 2 * Key.topPadding
         let y4 = Key.topPadding + 3 * heiht
@@ -40,6 +40,7 @@ class AlphabetBoard: UIView {
         let bRetrunWidth = height4 * 2
         let bSpace = UIButton(frame: CGRect(x: bSpaceX, y: y4, width: frame.size.width - bSpaceX - 3 * Key.leftPadding - bRetrunWidth, height: height4))
         bSpace.setTitle("space", for: .normal)
+        bSpace.setTitle("spacexxx", for: .highlighted)
         bSpace.backgroundColor = Key.backgroundColorNormal
         bSpace.layer.cornerRadius = Key.radius
         bSpace.clipsToBounds = true
@@ -110,5 +111,7 @@ class AlphabetBoard: UIView {
         re.append((KeyModel(sheng: "n", yun: nil)))
         re.append((KeyModel(sheng: "m", yun: nil)))
         return re
+    }
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
 }

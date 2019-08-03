@@ -10,12 +10,24 @@ import Foundation
 import UIKit
 import CoreGraphics
 
-class KeyModel: NSObject {
+class KeyModel: Equatable {
     var sheng = "okno"
-    var yun = "choice"
-    init(sheng: String?, yun: String?) {
+    var yun:[String] = []
+    var frame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+    init(sheng: String?, yun: String?...) {
         self.sheng = sheng ?? "okno"
-        self.yun = yun ?? "choice"
+        for item in yun {
+            if item != nil {
+                self.yun.append(item!)
+            }
+        }
+    }
+    static func ==(m1: KeyModel, m2: KeyModel) -> Bool {
+        if m1.sheng == m2.sheng {
+            return true
+        }else {
+            return false
+        }
     }
 }
 
@@ -23,6 +35,10 @@ class Key: NSObject {
     static let leftPadding: CGFloat = 3.0
     static let topPadding: CGFloat = 5.0
     static let radius: CGFloat = 4.0
+    static var width_button: CGFloat = 0.0
+    static var height_button: CGFloat = 0.0
+    static var width: CGFloat = 0.0
+    static var height: CGFloat = 0.0
     static let backgroundColorOther = #colorLiteral(red: 0.6351010799, green: 0.6533172727, blue: 0.6979339123, alpha: 1)
     static let backgroundColorNormal = #colorLiteral(red: 0.9755813479, green: 0.7846637368, blue: 0.1785585284, alpha: 1)
         /*
@@ -36,12 +52,14 @@ class Key: NSObject {
  */
 
     
-    static func drawARect(context:CGContext?, rect: CGRect) {
+    static func drawARect(context:CGContext?, rect: CGRect, draw_rect: inout CGRect) {
         // 绘制矩形框
-        let width = rect.size.width
-        let height = rect.size.height
+        width = rect.size.width
+        height = rect.size.height
         let width_l = width - (leftPadding + radius) * 2
         let height_l = height - (topPadding + radius) * 2
+        width_button = CGFloat(width - leftPadding * 2)
+        height_button = CGFloat(height - topPadding * 2)
         let x_l = rect.origin.x
         let y_l = rect.origin.y
         let leftTop = CGPoint(x: x_l + leftPadding + radius, y: y_l + topPadding + radius)
@@ -59,6 +77,7 @@ class Key: NSObject {
         context?.addLine(to: CGPoint(x: leftTop.x - radius, y: leftTop.y))
         context?.addArc(center: leftTop, radius: radius, startAngle: CGFloat.pi, endAngle: -CGFloat.pi/2, clockwise: false)
         context?.closePath()
+        draw_rect = CGRect(x: leftTop.x - radius, y: leftTop.y, width: width_button, height: height_button - 2 * radius)
     }
 }
 
@@ -104,4 +123,27 @@ class EarthKey:UIButton {
         
     }
     
+    
+}
+
+class PopView: UIView {
+    var label: UILabel!
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        label = UILabel(frame: frame)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        self.layer.cornerRadius = 5
+        self.clipsToBounds = true
+        self.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        self.addSubview(label)
+    }
+    
+    func setText(text: String?) -> Void {
+        label.text = text
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
